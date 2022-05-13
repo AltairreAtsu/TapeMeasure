@@ -1,0 +1,5 @@
+Hello and thank you for installing the Tape Measure mod!
+To get started simply place the Tape Measure start block wherever you would like to begin your measurement.
+Next place the Tape Measure end block wherever you would like to end your measurement.
+These blocks do not need to be in line and it is even possible to measure a 3d volume.
+To measure the distance simply tap either block with a stick.

@@ -1,0 +1,18 @@
+{
+    "Name": "Tape Measure",
+    "CreatorName": "Quill Inkwell",
+    "CategoryName": "Tape Measure",
+    "UniqueID": 3040,
+    "Recipe": {
+    		"Array" : [34,34,64,34,34,11],
+    		"SizeX": 1,
+    		"SizeY": 3,
+    		"SizeZ": 2
+    },
+    "Yield": 50,
+    "SimilarTo": 1,
+    "Textures": {
+        "Mode": 2,
+        "WithNormals" : false
+    }
+}
