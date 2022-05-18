@@ -1,6 +1,6 @@
 Tape Measure 
 by Quill Inkwell
-Version 0.1
+Version 0.3
 
 Installation Instructions:
 ===============================================

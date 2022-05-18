@@ -44,7 +44,7 @@ void Event_BlockHitByTool(CoordinateInBlocks At, UniqueID CustomBlockID, wString
 							 + L"Distance Y: " + std::to_wstring(abs(distanceY)) + L"\n"
 							 + L"Distance Z: " + std::to_wstring(abs(distanceZ)) + L"\n"
 							 + L"Distance to point: " + std::to_wstring(abs(totalDistance));
-		SpawnHintText(At+CoordinateInCentimeters(0,0,75), message, 3, 2);
+		SpawnHintText(At+CoordinateInCentimeters(0,0,75), message, 6, 2);
 	}
 }
 
