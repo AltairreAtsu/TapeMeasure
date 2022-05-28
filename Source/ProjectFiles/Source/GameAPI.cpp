@@ -11,13 +11,20 @@ void Log(const wString& String)
 
 BlockInfo GetBlock(CoordinateInBlocks At)
 {
-	BlockInfoC Type = InternalFunctions::I_GetBlock(At);
-	return *((BlockInfo*)(&Type));
+	return InternalFunctions::I_GetBlock(At);
 }
 
 bool SetBlock(CoordinateInBlocks At, BlockInfo BlockType)
 {
-	return InternalFunctions::I_SetBlock(At, BlockType);
+	BlockInfo BlockTypeOut;
+	return InternalFunctions::I_SetBlock(At, BlockType, BlockTypeOut);
+}
+
+BlockInfo GetAndSetBlock(CoordinateInBlocks At, BlockInfo BlockType)
+{
+	BlockInfo BlockTypeOut;
+	InternalFunctions::I_SetBlock(At, BlockType, BlockTypeOut);
+	return BlockTypeOut;
 }
 
 void SpawnHintText(CoordinateInCentimeters At, const wString& Text, float DurationInSeconds, float SizeMultiplier, float SizeMultiplierVertical)
@@ -58,8 +65,7 @@ CoordinateInCentimeters GetPlayerLocationHead()
 
 DirectionVectorInCentimeters GetPlayerViewDirection()
 {
-	DirectionVectorInCentimetersC Type = InternalFunctions::I_GetPlayerViewDirection();
-	return*((DirectionVectorInCentimeters*)(&Type));
+	return InternalFunctions::I_GetPlayerViewDirection();
 }
 
 CoordinateInCentimeters GetHandLocation(bool LeftHand)
@@ -111,6 +117,16 @@ bool IsCurrentlyNight()
 void PlayHapticFeedbackOnHand(bool LeftHand, float DurationSeconds, float Frequency, float Amplitude)
 {
 	return InternalFunctions::I_PlayHapticFeedbackOnHand(LeftHand, DurationSeconds, Frequency, Amplitude);
+}
+
+float GetPlayerHealth()
+{
+	return InternalFunctions::I_GetPlayerHealth();
+}
+
+float SetPlayerHealth(float NewHealth, bool Offset)
+{
+	return InternalFunctions::I_SetPlayerHealth(NewHealth, Offset);
 }
 
 void SpawnBPModActor(CoordinateInCentimeters At, const wString& ModName, const wString& ActorName)
@@ -208,7 +224,7 @@ std::vector<CoordinateInBlocks> GetAllCoordinatesInRadius(CoordinateInBlocks At,
 
 
 #pragma warning(disable:6386)
-wString GetThisModFolderPathInternal()
+wString GetThisModInstallFolderPathInternal()
 {
 	wchar_t path[MAX_PATH];
 	HMODULE hm = NULL;
@@ -233,11 +249,25 @@ wString GetThisModFolderPathInternal()
 }
 #pragma warning(default:6386)
 
-const wString& GetThisModFolderPath()
+const wString& GetThisModInstallFolderPath()
 {
-	static const std::wstring Path = GetThisModFolderPathInternal();
+	static const std::wstring Path = GetThisModInstallFolderPathInternal();
 
 	return Path;
+}
+
+wString GetThisModSaveFolderPath(wString ModName)
+{
+	wchar_t StringOut[1000];
+	InternalFunctions::I_GetThisModSaveFolderPath(ModName.c_str(), StringOut);
+
+	return wString(StringOut);
+}
+
+GameVersion GetGameVersionNumber()
+{
+	static GameVersion VersionNumber = InternalFunctions::I_GetGameVersionNumber();
+	return VersionNumber;
 }
 
 ScopedSharedMemoryHandle GetSharedMemoryPointer(wString Key, bool CreateIfNotExist, bool WaitUntilExist)
